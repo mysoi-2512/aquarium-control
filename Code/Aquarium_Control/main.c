@@ -1,22 +1,19 @@
-/*
- * Aquarium_Control.c
- *
- * Created: 4/8/2025 7:47:52 PM
- * Author : Admin
- */
-
-#define F_CPU 16000000UL // ??t t?n s? th?ch anh c?a Arduino UNO
+#define F_CPU 16000000UL 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>
 #include <string.h>
 #include "Ds18b20_Sensor/ds18b20_sensor.h"
+#include "Pwm_Control/pwm_control.h"
 #include "Lcd_Display/lcd_display.h"
 #include "I2C/I2C.h"
-#include "Uart/uart_utils.h" // Include file Uart/uart_utils.h
+#include "Uart/uart_utils.h"
+#include "interface.h"
 
 #define BAUD 9600
 #define UBRR_VALUE F_CPU / 16 / BAUD - 1
+
+SystemState systemState;
 
 int main(void) {
   USART_Init(UBRR_VALUE); // Kh?i t?o UART
@@ -24,42 +21,41 @@ int main(void) {
   printf("Chuong trinh doc nhiet do DS18B20, hien thi LCD (I2C) va UART (AVR)\r\n");
 
   i2c_init();
-  ds18b20_init(DS18B20_PIN);
+	ds18b20_init(DS18B20_PIN);
   lcd_init();
-
-  //char temp_str_lcd[20];
-
+  pwm_init();
+  
+//   while(1){
+// 	systemState.temperature = 27.5;
+// 	pwm_update_based_on_temp(systemState.temperature, &systemState);
+// 	lcd_display_status(&systemState);
+//   }
+	
   while (1) {
     if (ds18b20_reset()) {
+		
         ds18b20_request_temperature();
-        float temperatureC = ds18b20_read_temperature();
-        //float temperatureC = 28.5;
-		char test_str_lcd[20];
+		
+		systemState.temperature = ds18b20_read_temperature();		
+		
+		pwm_update_based_on_temp(systemState.temperature, &systemState);
+	
+		lcd_display_status(&systemState);
 
-        printf("Reset Result: 1\r\n"); // In k?t qu? reset thành công
+        printf("Reset Result: 1\r\n"); 
 
-        // Hi?n th? lên LCD
-        lcd_clear(); // Thêm l?nh xóa màn hình tr??c khi in
-        sprintf(test_str_lcd, "Temp: %d*C", (int)temperatureC);
-        lcd_set_cursor(0, 0);
-        //lcd_send_string(temp_str_lcd);
-		lcd_send_string(test_str_lcd);
-
-        // G?i qua UART b?ng printf
-        printf("Nhiet do: %.1f *C\r\n", temperatureC);
+        printf("Nhiet do: %.1f *C\r\n", systemState.temperature);
     } else {
-        printf("Reset Result: 0\r\n"); // In k?t qu? reset th?t b?i
+        printf("Reset Result: 0\r\n"); 
 
-        // Hi?n th? l?i trên LCD
-        lcd_clear(); // Thêm l?nh xóa màn hình tr??c khi in l?i
+        lcd_clear();
         lcd_set_cursor(0, 0);
         lcd_send_string("Sensor Error");
 
-        // G?i thông báo l?i qua UART b?ng printf
         printf("Loi: Khong tim thay cam bien DS18B20\r\n");
-    }
+	}
 
-    _delay_ms(1000);
+    _delay_ms(2000);
 }
 
   return 0;

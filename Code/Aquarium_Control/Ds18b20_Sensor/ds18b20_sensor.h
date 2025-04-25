@@ -12,7 +12,7 @@
 #include <avr/io.h>
 
 // ??nh ngh?a ch‚n k?t n?i v?i bus 1-Wire
-#define DS18B20_PIN PD2 // *** QUAN TR?NG: X¡C NH?N CH¬N K?T N?I TH?C T? TR N ARDUINO (vÌ d?: D2 t??ng ?ng PD2) ***
+#define DS18B20_PIN PD2 // *** QUAN TR?NG: X¡C NH?N CH¬N K?T N?I TH?C T? TR N ARDUINO (vÅEd?: D2 t??ng ?ng PD2) ***
 
 // Khai b·o c·c h‡m
 void ds18b20_init(uint8_t pin);

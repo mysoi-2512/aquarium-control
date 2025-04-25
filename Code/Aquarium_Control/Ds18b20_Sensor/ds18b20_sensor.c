@@ -11,29 +11,29 @@
 
 // Hàm kh?i t?o chân k?t n?i DS18B20
 void ds18b20_init(uint8_t pin) {
-	// Thi?t l?p chân làm output (ban ??u) và kéo lên m?c cao
+	// Thi?t l?p chân làm output (ban ??u) vEkéo lên m?c cao
 	DDRD |= (1 << pin);
 	PORTD |= (1 << pin);
 }
 
-// G?i xung reset và ki?m tra ph?n h?i presence pulse
+// G?i xung reset vEki?m tra ph?n h?i presence pulse
 uint8_t ds18b20_reset(void) {
 	uint8_t presence = 0;
 
 	printf("Bat dau reset DS18B20...\r\n");
 
-	// Kéo chân xu?ng m?c th?p trong ít nh?t 480 us
+	// Kéo chân xu?ng m?c th?p trong ú‘ nh?t 480 us
 	DDRD |= (1 << DS18B20_PIN);
 	PORTD &= ~(1 << DS18B20_PIN);
 	printf("Keo chan xuong...\r\n");
 	_delay_us(500);
 
-	// Th? chân và chuy?n sang input ?? nghe presence pulse
+	// Th? chân vEchuy?n sang input ?? nghe presence pulse
 	DDRD &= ~(1 << DS18B20_PIN);
 	printf("Tha chan...\r\n");
 	_delay_us(70);
 
-	// ??c giá tr? chân (presence pulse s? kéo nó xu?ng th?p trong 60-240 us)
+	// ??c giEtr? chân (presence pulse s? kéo nExu?ng th?p trong 60-240 us)
 	if (!(PIND & (1 << DS18B20_PIN))) {
 		printf("Phat hien presence pulse!\r\n");
 		presence = 1;
@@ -74,7 +74,7 @@ uint8_t ds18b20_read_bit(void) {
 	DDRD &= ~(1 << DS18B20_PIN);
 	_delay_us(15);
 
-	// ??c giá tr? bit
+	// ??c giEtr? bit
 	if (PIND & (1 << DS18B20_PIN)) {
 		bit = 1;
 	}
@@ -104,12 +104,12 @@ uint8_t ds18b20_read_byte(void) {
 // Yêu c?u c?m bi?n b?t ??u ?o nhi?t ??
 void ds18b20_request_temperature(void) {
 	ds18b20_reset();
-	ds18b20_write_byte(0xCC); // Skip ROM (gi? s? ch? có m?t thi?t b?)
+	ds18b20_write_byte(0xCC); // Skip ROM (gi? s? ch? cEm?t thi?t b?)
 	ds18b20_write_byte(0x44); // Convert T
-	_delay_ms(750); // Ch? quá trình ?o hoàn t?t (có th? c?n ?i?u ch?nh)
+	_delay_ms(750); // Ch? quEtrEh ?o hoàn t?t (cEth? c?n ?i?u ch?nh)
 }
 
-// ??c nhi?t ?? t? c?m bi?n và tr? v? giá tr? float (?? C)
+// ??c nhi?t ?? t? c?m bi?n vEtr? v? giEtr? float (?? C)
 float ds18b20_read_temperature(void) {
 	uint8_t temp_low, temp_high;
 	int16_t raw_temp;
@@ -124,7 +124,7 @@ float ds18b20_read_temperature(void) {
 
 	raw_temp = (temp_high << 8) | temp_low;
 
-	// Nhi?t ?? ???c bi?u di?n d??i d?ng s? d?u ph?y ??ng 12-bit (có d?u)
+	// Nhi?t ?? ???c bi?u di?n d??i d?ng s? d?u ph?y ??ng 12-bit (cEd?u)
 	if (raw_temp & 0x8000) { // Nhi?t ?? âm
 		raw_temp = (~raw_temp) + 1;
 		temperature = -((float)raw_temp / 16.0);

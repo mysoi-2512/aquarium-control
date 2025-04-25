@@ -1,25 +1,18 @@
-/*
- * lcd_display.c
- *
- * Created: 4/8/2025 8:20:45 PM
- * Author: Admin
- */
-
 #include "lcd_display.h"
-#define F_CPU 16000000UL // ??t t?n s? th?ch anh
-#include "../I2C/I2C.h" // ???ng d?n ??n I2C.h
+#include "../interface.h"
+#define F_CPU 16000000UL 
+#include "../I2C/I2C.h"
 #include <avr/io.h>
 #include <util/delay.h>
 #include <string.h>
 #include <stdio.h>
 #include <inttypes.h>
 
-// Hàm g?i m?t nibble (4 bits) d? li?u ??n LCD qua I2C
 static void lcd_send_nibble_i2c(uint8_t data) {
     uint8_t i2c_data;
 
     // G?i 4 bits cao + các chân ?i?u khi?n
-    i2c_data = (data & 0xF0) | LCD_BL_PIN; // Gi? backlight luôn b?t (có th? ?i?u ch?nh)
+    i2c_data = (data & 0xF0) | LCD_BL_PIN; // Gi? backlight luôn b?t (cEth? ?i?u ch?nh)
 
     // Enable pulse
     i2c_start(LCD_I2C_ADDR);
@@ -30,7 +23,6 @@ static void lcd_send_nibble_i2c(uint8_t data) {
     _delay_us(50); // T?ng th?i gian tr?
 }
 
-// Hàm g?i m?t byte d? li?u (command ho?c character) ??n LCD qua I2C
 void lcd_send_byte_i2c(uint8_t data, uint8_t rs) {
     uint8_t i2c_data_high, i2c_data_low;
 
@@ -55,7 +47,6 @@ void lcd_send_byte_i2c(uint8_t data, uint8_t rs) {
    // _delay_us(100);
 }
 
-// Hàm kh?i t?o LCD s? d?ng I2C
 void lcd_init(void) {
     i2c_init(); // Kh?i t?o giao ti?p I2C
     _delay_ms(100); // T?ng th?i gian tr?
@@ -76,12 +67,10 @@ void lcd_init(void) {
     lcd_send_byte_i2c(0x06, 0); // Ch? ?? d?ch con tr? sang ph?i sau m?i kı t?
 }
 
-// Hàm g?i m?t kı t? ??n LCD
 void lcd_send_char(char data) {
     lcd_send_byte_i2c(data, 1); // rs = 1 cho d? li?u (kı t?)
 }
 
-// Hàm g?i m?t chu?i ??n LCD
 void lcd_send_string(const char *str) {
     while (*str) {
 		//lcd_send_char('28.0');
@@ -89,7 +78,25 @@ void lcd_send_string(const char *str) {
     }
 }
 
-// Hàm ??t con tr? LCD ??n v? trí dòng và c?t
+void lcd_display_status(const SystemState* state) {
+	
+	lcd_set_cursor(0, 0);
+	char line1[16];
+	uint8_t temp_int = (uint8_t)state->temperature;
+	uint8_t temp_frac = (uint8_t)((state->temperature - temp_int) * 10);
+
+	snprintf(line1, sizeof(line1), "Temp: %d.%d C", temp_int, temp_frac);	
+	lcd_send_string(line1);
+
+
+	lcd_set_cursor(1, 0);
+	char line2[17];
+	snprintf(line2, sizeof(line2), "Pump:%s PWM:%3d%%",
+	state->pump_status ? "ON " : "OFF", state->pump_pwm_value);
+	lcd_send_string(line2);
+}
+
+
 void lcd_set_cursor(uint8_t row, uint8_t col) {
     uint8_t address;
     switch (row) {
@@ -97,11 +104,10 @@ void lcd_set_cursor(uint8_t row, uint8_t col) {
         case 1: address = 0x40; break;
         default: address = 0x00; break;
     }
-    lcd_send_byte_i2c(0x80 | (address + col), 0); // 0x80 là l?nh ??t ??a ch? DDRAM
+    lcd_send_byte_i2c(0x80 | (address + col), 0); // 0x80 lEl?nh ??t ??a ch? DDRAM
 }
 
-// Hàm xóa màn hình LCD
 void lcd_clear(void) {
-    lcd_send_byte_i2c(0x01, 0); // 0x01 là l?nh xóa màn hình
+    lcd_send_byte_i2c(0x01, 0); // 0x01 lEl?nh xóa màn hEh
     _delay_ms(5); // T?ng th?i gian tr?
 }

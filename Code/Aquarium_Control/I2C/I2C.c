@@ -30,11 +30,11 @@ uint8_t i2c_start(uint8_t address) {
 		return 1; // L?i: START condition không thành công
 	}
 
-	// G?i ??a ch? thi?t b? và bit ghi (0)
+	// G?i ??a ch? thi?t b? vEbit ghi (0)
 	TWDR = (address << 1) | TW_WRITE;
 	// Xóa c? TWINT ?? b?t ??u g?i ??a ch?
 	TWCR = (1 << TWEN) | (1 << TWINT);
-	// Ch? cho ??a ch? ???c g?i và nh?n ACK
+	// Ch? cho ??a ch? ???c g?i vEnh?n ACK
 	while (!(TWCR & (1 << TWINT)));
 
 	// Ki?m tra tr?ng thái ACK
@@ -51,7 +51,7 @@ uint8_t i2c_write(uint8_t data) {
 	TWDR = data;
 	// Xóa c? TWINT ?? b?t ??u g?i d? li?u
 	TWCR = (1 << TWEN) | (1 << TWINT);
-	// Ch? cho d? li?u ???c g?i và nh?n ACK
+	// Ch? cho d? li?u ???c g?i vEnh?n ACK
 	while (!(TWCR & (1 << TWINT)));
 
 	// Ki?m tra tr?ng thái ACK
@@ -66,6 +66,6 @@ uint8_t i2c_write(uint8_t data) {
 void i2c_stop(void) {
 	// G?i STOP condition
 	TWCR = (1 << TWEN) | (1 << TWSTO) | (1 << TWINT);
-	// Ch? cho STOP condition ???c g?i (th?c t? có th? không c?n ch?)
+	// Ch? cho STOP condition ???c g?i (th?c t? cEth? không c?n ch?)
 	while (TWCR & (1 << TWSTO));
 }

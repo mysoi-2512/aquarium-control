@@ -9,9 +9,9 @@
 #define I2C_H
 
 #include <inttypes.h>
-#include <avr/io.h> // ThÍm include n‡y n?u ch?a cÛ trong I2C.c
+#include <avr/io.h> // ThÍm include n‡y n?u ch?a cÅEtrong I2C.c
 
-// ??nh ngh?a t?c ?? xung clock I2C (SCL) - CÛ th? ?i?u ch?nh
+// ??nh ngh?a t?c ?? xung clock I2C (SCL) - CÅEth? ?i?u ch?nh
 #define I2C_SCL_FREQUENCY 100000UL // 100kHz
 
 // H‡m kh?i t?o giao ti?p I2C
