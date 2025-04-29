@@ -5,21 +5,22 @@
 
 // ==== Bien dung chung ====
 
-extern float g_current_temperature;        // Nhiet do doc tu cam bien DS18B20
-extern uint8_t g_pump_pwm_value;           // Gia tri PWM dieu khien bom (0?255)
-extern uint8_t g_pump_status;              // Trang thai bom: 1 = ON, 0 = OFF
+typedef struct {
+	float temperature;      // Temp
+	uint8_t pump_status;   // Pump Status
+	uint8_t pump_pwm_value; // % PWM
+} SystemState;
 
 // ==== LCD Display Module ====
 // -> Goi boi PWM control va DS18B20 de hien thi thong tin
 
-void lcd_display_temperature(float temp);               // Hien thi nhiet do
-void lcd_display_pump_info(uint8_t status, uint8_t pwm);// Hien thi trang thai va muc PWM cua bom
+void lcd_display_status(const SystemState* state);
 void lcd_init(void);                                    // Khoi tao LCD (su dung I2C)
 
 // ==== DS18B20 Sensor Module ====
 // -> Goi boi PWM control de doc nhiet do
 
-void ds18b20_init(void);                                // Khoi tao DS18B20
+//void ds18b20_init(void);                                // Khoi tao DS18B20
 float ds18b20_read_temperature(void);                   // Doc nhiet do tu DS18B20
 
 // ==== PWM Pump Control Module ====
@@ -28,7 +29,7 @@ float ds18b20_read_temperature(void);                   // Doc nhiet do tu DS18B
 
 void pwm_init(void);                                    // Khoi tao PWM
 void pwm_set_duty(uint8_t duty);                        // Cap nhat gia tri PWM
-void pwm_update_based_on_temp(float temp);              // Dieu chinh PWM theo nhiet do
+void pwm_update_based_on_temp(float temp, SystemState* state);              // Dieu chinh PWM theo nhiet do
 
 // ==== Relay Control Module ====
 // -> Dieu khien relay cho TEC1

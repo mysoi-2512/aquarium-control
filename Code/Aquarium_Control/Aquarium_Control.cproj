@@ -29,16 +29,16 @@
     <eraseonlaunchrule>0</eraseonlaunchrule>
     <EraseKey />
     <AsfFrameworkConfig>
-      <framework-data xmlns="">
-        <options />
-        <configurations />
-        <files />
-        <documentation help="" />
-        <offline-documentation help="" />
-        <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.52.0" />
-        </dependencies>
-      </framework-data>
+      <framework-data>
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.44.1" />
+  </dependencies>
+</framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
     <avrtoolserialnumber />
@@ -151,10 +151,10 @@
     <Compile Include="Ds18b20_Sensor/ds18b20_sensor.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="I2C/i2c.c">
+    <Compile Include="I2C\I2C.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="I2C/i2c.h">
+    <Compile Include="I2C\I2C.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="interface.h">
@@ -190,18 +190,28 @@
     <Compile Include="Ds18b20_Sensor/ds18b20_sensor.h">
       <SubType>compile</SubType>
     </Compile>
-        <Compile Include="Led_Chasing/led_chasing.h">
+    <Compile Include="Led_Chasing/led_chasing.h">
       <SubType>compile</SubType>
     </Compile>
-        <Compile Include="Led_Chasing/led_chasing.c">
+    <Compile Include="Led_Chasing/led_chasing.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Uart/uart.c">
+    <Compile Include="Uart\uart_utils.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Uart/uart.h">
+    <Compile Include="Uart\uart_utils.h">
       <SubType>compile</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ds18b20_Sensor\" />
+    <Folder Include="Ir_Remote\" />
+    <Folder Include="Lcd_Display\" />
+    <Folder Include="Led_Chasing\" />
+    <Folder Include="I2C" />
+    <Folder Include="Uart" />
+    <Folder Include="Pwm_Control\" />
+    <Folder Include="Servo_Control\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
