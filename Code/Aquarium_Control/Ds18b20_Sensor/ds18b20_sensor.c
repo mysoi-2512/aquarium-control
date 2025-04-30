@@ -9,11 +9,11 @@
 #include <util/delay.h>
 #include "../Uart/uart_utils.h" // ??m b?o include file UART
 
-// H‡m kh?i t?o ch‚n k?t n?i DS18B20
-void ds18b20_init(uint8_t pin) {
-	// Thi?t l?p ch‚n l‡m output (ban ??u) vÅEkÈo lÍn m?c cao
-	DDRD |= (1 << pin);
-	PORTD |= (1 << pin);
+#define DS18B20_PIN PD2
+
+void ds18b20_init() {
+	DDRD |= (1 << DS18B20_PIN);
+	PORTD |= (1 << DS18B20_PIN);
 }
 
 // G?i xung reset vÅEki?m tra ph?n h?i presence pulse

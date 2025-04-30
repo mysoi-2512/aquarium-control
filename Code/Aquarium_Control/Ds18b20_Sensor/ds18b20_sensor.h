@@ -11,11 +11,8 @@
 
 #include <avr/io.h>
 
-// ??nh ngh?a chân k?t n?i v?i bus 1-Wire
-#define DS18B20_PIN PD2 // *** QUAN TR?NG: XÁC NH?N CHÂN K?T N?I TH?C T? TRÊN ARDUINO (vEd?: D2 t??ng ?ng PD2) ***
-
-// Khai báo các hàm
-void ds18b20_init(uint8_t pin);
+// Khai bï¿½o cï¿½c hï¿½m
+void ds18b20_init();
 uint8_t ds18b20_reset(void);
 void ds18b20_write_bit(uint8_t bit);
 uint8_t ds18b20_read_bit(void);

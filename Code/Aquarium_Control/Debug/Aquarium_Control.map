@@ -35,7 +35,7 @@ d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.
 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
                               Ds18b20_Sensor/ds18b20_sensor.o (__do_copy_data)
 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              main.o (__do_clear_bss)
+                              Servo_Control/servo_control.o (__do_clear_bss)
 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
                               Pwm_Control/pwm_control.o (__umulhisi3)
 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
@@ -64,7 +64,6 @@ d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.
 Allocating common symbols
 Common symbol       size              file
 
-systemState         0x6               main.o
 __iob               0x6               d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
 
 Discarded input sections
@@ -74,9 +73,55 @@ Discarded input sections
  .text          0x00000000        0x0 Ds18b20_Sensor/ds18b20_sensor.o
  .data          0x00000000        0x0 Ds18b20_Sensor/ds18b20_sensor.o
  .bss           0x00000000        0x0 Ds18b20_Sensor/ds18b20_sensor.o
+ .text.ds18b20_init
+                0x00000000        0xe Ds18b20_Sensor/ds18b20_sensor.o
+ .rodata.str1.1
+                0x00000000       0x96 Ds18b20_Sensor/ds18b20_sensor.o
+ .text.ds18b20_reset
+                0x00000000       0x88 Ds18b20_Sensor/ds18b20_sensor.o
+ .text.ds18b20_write_bit
+                0x00000000       0x32 Ds18b20_Sensor/ds18b20_sensor.o
+ .text.ds18b20_read_bit
+                0x00000000       0x32 Ds18b20_Sensor/ds18b20_sensor.o
+ .text.ds18b20_write_byte
+                0x00000000       0x2c Ds18b20_Sensor/ds18b20_sensor.o
+ .text.ds18b20_read_byte
+                0x00000000       0x32 Ds18b20_Sensor/ds18b20_sensor.o
+ .text.ds18b20_request_temperature
+                0x00000000       0x24 Ds18b20_Sensor/ds18b20_sensor.o
+ .text.ds18b20_read_temperature
+                0x00000000       0x68 Ds18b20_Sensor/ds18b20_sensor.o
+ .debug_info    0x00000000      0x5c7 Ds18b20_Sensor/ds18b20_sensor.o
+ .debug_abbrev  0x00000000      0x205 Ds18b20_Sensor/ds18b20_sensor.o
+ .debug_loc     0x00000000      0x506 Ds18b20_Sensor/ds18b20_sensor.o
+ .debug_aranges
+                0x00000000       0x58 Ds18b20_Sensor/ds18b20_sensor.o
+ .debug_ranges  0x00000000       0x60 Ds18b20_Sensor/ds18b20_sensor.o
+ .debug_line    0x00000000      0x36e Ds18b20_Sensor/ds18b20_sensor.o
+ .debug_str     0x00000000      0x2d2 Ds18b20_Sensor/ds18b20_sensor.o
+ .comment       0x00000000       0x31 Ds18b20_Sensor/ds18b20_sensor.o
+ .debug_frame   0x00000000       0xc8 Ds18b20_Sensor/ds18b20_sensor.o
  .text          0x00000000        0x0 I2C/I2C.o
  .data          0x00000000        0x0 I2C/I2C.o
  .bss           0x00000000        0x0 I2C/I2C.o
+ .text.i2c_init
+                0x00000000        0xe I2C/I2C.o
+ .text.i2c_start
+                0x00000000       0x4c I2C/I2C.o
+ .text.i2c_write
+                0x00000000       0x24 I2C/I2C.o
+ .text.i2c_stop
+                0x00000000       0x10 I2C/I2C.o
+ .debug_info    0x00000000       0xf5 I2C/I2C.o
+ .debug_abbrev  0x00000000       0x7c I2C/I2C.o
+ .debug_loc     0x00000000       0x67 I2C/I2C.o
+ .debug_aranges
+                0x00000000       0x38 I2C/I2C.o
+ .debug_ranges  0x00000000       0x28 I2C/I2C.o
+ .debug_line    0x00000000      0x162 I2C/I2C.o
+ .debug_str     0x00000000      0x19e I2C/I2C.o
+ .comment       0x00000000       0x31 I2C/I2C.o
+ .debug_frame   0x00000000       0x54 I2C/I2C.o
  .text          0x00000000        0x0 Ir_Remote/ir_remote.o
  .data          0x00000000        0x0 Ir_Remote/ir_remote.o
  .bss           0x00000000        0x0 Ir_Remote/ir_remote.o
@@ -86,72 +131,170 @@ Discarded input sections
  .text          0x00000000        0x0 Lcd_Display/lcd_display.o
  .data          0x00000000        0x0 Lcd_Display/lcd_display.o
  .bss           0x00000000        0x0 Lcd_Display/lcd_display.o
+ .text.lcd_send_nibble_i2c
+                0x00000000       0x3e Lcd_Display/lcd_display.o
+ .text.lcd_send_byte_i2c
+                0x00000000       0x58 Lcd_Display/lcd_display.o
+ .text.lcd_send_char
+                0x00000000        0x8 Lcd_Display/lcd_display.o
+ .text.lcd_send_string
+                0x00000000       0x1a Lcd_Display/lcd_display.o
+ .text.lcd_set_cursor
+                0x00000000       0x16 Lcd_Display/lcd_display.o
+ .rodata.str1.1
+                0x00000000       0x28 Lcd_Display/lcd_display.o
+ .text.lcd_display_status
+                0x00000000      0x110 Lcd_Display/lcd_display.o
+ .text.lcd_clear
+                0x00000000       0x16 Lcd_Display/lcd_display.o
+ .text.lcd_init
+                0x00000000       0x70 Lcd_Display/lcd_display.o
+ .debug_info    0x00000000      0x725 Lcd_Display/lcd_display.o
+ .debug_abbrev  0x00000000      0x1f2 Lcd_Display/lcd_display.o
+ .debug_loc     0x00000000      0x568 Lcd_Display/lcd_display.o
+ .debug_aranges
+                0x00000000       0x58 Lcd_Display/lcd_display.o
+ .debug_ranges  0x00000000       0x48 Lcd_Display/lcd_display.o
+ .debug_line    0x00000000      0x31d Lcd_Display/lcd_display.o
+ .debug_str     0x00000000      0x31a Lcd_Display/lcd_display.o
+ .comment       0x00000000       0x31 Lcd_Display/lcd_display.o
+ .debug_frame   0x00000000       0xf4 Lcd_Display/lcd_display.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  .text          0x00000000        0x0 Pwm_Control/pwm_control.o
  .data          0x00000000        0x0 Pwm_Control/pwm_control.o
  .bss           0x00000000        0x0 Pwm_Control/pwm_control.o
+ .text.pwm_init
+                0x00000000       0x1c Pwm_Control/pwm_control.o
+ .text.pwm_set_duty
+                0x00000000       0x62 Pwm_Control/pwm_control.o
+ .text.pwm_update_based_on_temp
+                0x00000000       0x92 Pwm_Control/pwm_control.o
+ .debug_info    0x00000000      0x16a Pwm_Control/pwm_control.o
+ .debug_abbrev  0x00000000       0xdf Pwm_Control/pwm_control.o
+ .debug_loc     0x00000000      0x17f Pwm_Control/pwm_control.o
+ .debug_aranges
+                0x00000000       0x30 Pwm_Control/pwm_control.o
+ .debug_ranges  0x00000000       0x20 Pwm_Control/pwm_control.o
+ .debug_line    0x00000000      0x196 Pwm_Control/pwm_control.o
+ .debug_str     0x00000000      0x206 Pwm_Control/pwm_control.o
+ .comment       0x00000000       0x31 Pwm_Control/pwm_control.o
+ .debug_frame   0x00000000       0x68 Pwm_Control/pwm_control.o
  .text          0x00000000        0x0 Servo_Control/servo_control.o
  .data          0x00000000        0x0 Servo_Control/servo_control.o
  .bss           0x00000000        0x0 Servo_Control/servo_control.o
- .debug_line    0x00000000        0x0 Servo_Control/servo_control.o
- .debug_str     0x00000000      0x110 Servo_Control/servo_control.o
- .comment       0x00000000       0x31 Servo_Control/servo_control.o
+ .text.servo_init
+                0x00000000       0x2a Servo_Control/servo_control.o
+ .text.servo_pwm_start
+                0x00000000       0x1a Servo_Control/servo_control.o
+ .text.servo_pwm_stop
+                0x00000000        0xa Servo_Control/servo_control.o
+ .text.servo_rotate
+                0x00000000       0x40 Servo_Control/servo_control.o
  .text          0x00000000        0x0 Led_Chasing/led_chasing.o
  .data          0x00000000        0x0 Led_Chasing/led_chasing.o
  .bss           0x00000000        0x0 Led_Chasing/led_chasing.o
- .debug_line    0x00000000        0x0 Led_Chasing/led_chasing.o
- .debug_str     0x00000000      0x10c Led_Chasing/led_chasing.o
- .comment       0x00000000       0x31 Led_Chasing/led_chasing.o
+ .text.led_off  0x00000000       0x12 Led_Chasing/led_chasing.o
+ .text.led_on_all
+                0x00000000       0x12 Led_Chasing/led_chasing.o
+ .text.updateLEDs
+                0x00000000       0x48 Led_Chasing/led_chasing.o
  .text          0x00000000        0x0 Uart/uart_utils.o
  .data          0x00000000        0x0 Uart/uart_utils.o
  .bss           0x00000000        0x0 Uart/uart_utils.o
+ .text.USART_Init
+                0x00000000       0x16 Uart/uart_utils.o
+ .text.USART_Transmit
+                0x00000000        0xe Uart/uart_utils.o
+ .text.USART_PutString
+                0x00000000       0x2c Uart/uart_utils.o
+ .text.printf   0x00000000       0x58 Uart/uart_utils.o
+ .debug_info    0x00000000      0x210 Uart/uart_utils.o
+ .debug_abbrev  0x00000000      0x16c Uart/uart_utils.o
+ .debug_loc     0x00000000      0x1a1 Uart/uart_utils.o
+ .debug_aranges
+                0x00000000       0x38 Uart/uart_utils.o
+ .debug_ranges  0x00000000       0x28 Uart/uart_utils.o
+ .debug_line    0x00000000      0x191 Uart/uart_utils.o
+ .debug_str     0x00000000      0x1fb Uart/uart_utils.o
+ .comment       0x00000000       0x31 Uart/uart_utils.o
+ .debug_frame   0x00000000       0x84 Uart/uart_utils.o
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+ .text.avr-libc.fplib
+                0x00000000        0xe d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+ .text.avr-libc.fplib
+                0x00000000       0xcc d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+ .text.avr-libc.fplib
+                0x00000000       0x5e d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+ .text.avr-libc.fplib
+                0x00000000       0x7a d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+ .text.avr-libc.fplib
+                0x00000000        0xc d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+ .text.avr-libc.fplib
+                0x00000000        0x6 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+ .text.avr-libc.fplib
+                0x00000000        0xe d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+ .text.avr-libc.fplib
+                0x00000000        0xe d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+ .text.avr-libc.fplib
+                0x00000000       0x22 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+ .text.avr-libc.fplib
+                0x00000000       0x44 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+ .text.avr-libc.fplib
+                0x00000000        0xe d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
+ .text.avr-libc.fplib
+                0x00000000        0xa d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+ .text.avr-libc.fplib
+                0x00000000        0x8 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+ .text.avr-libc.fplib
+                0x00000000       0xd2 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
+ .text.avr-libc.fplib
+                0x00000000       0x48 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
@@ -203,6 +346,8 @@ Discarded input sections
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+ .text.libgcc.mul
+                0x00000000       0x1e d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .text.libgcc.div
                 0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
  .text.libgcc   0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
@@ -217,30 +362,53 @@ Discarded input sections
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
+ .text.avr-libc
+                0x00000000       0x60 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
+ .comment       0x00000000       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
+ .text.avr-libc
+                0x00000000       0x60 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
+ .comment       0x00000000       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vsnprintf.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vsnprintf.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vsnprintf.o)
+ .text.avr-libc
+                0x00000000       0x58 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vsnprintf.o)
+ .comment       0x00000000       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vsnprintf.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .text.avr-libc
+                0x00000000      0x3c2 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+ .comment       0x00000000       0x2d d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+ .text.avr-libc
+                0x00000000       0x16 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+ .text.avr-libc
+                0x00000000       0x16 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .text.avr-libc
+                0x00000000       0x78 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+ .comment       0x00000000       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
+ .comment       0x00000000       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
+ COMMON         0x00000000        0x6 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+ .text.avr-libc
+                0x00000000       0xbc d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
  .text          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
  .data          0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
  .bss           0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
@@ -249,6 +417,8 @@ Discarded input sections
  .text.libgcc.div
                 0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
  .text.libgcc   0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+ .text.libgcc.prologue
+                0x00000000       0x38 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
  .text.libgcc.builtins
                 0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
  .text.libgcc.fmul
@@ -263,6 +433,8 @@ Discarded input sections
  .text.libgcc.div
                 0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
  .text.libgcc   0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+ .text.libgcc.prologue
+                0x00000000       0x36 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
  .text.libgcc.builtins
                 0x00000000        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
  .text.libgcc.fmul
@@ -404,7 +576,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x124c
+.text           0x00000000      0x256
  *(.vectors)
  .vectors       0x00000000       0x68 D:/Microchip_Setup/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -477,10 +649,8 @@ END GROUP
                 0x000000a2                __vector_17
                 0x000000a2                __vector_19
                 0x000000a2                __vector_7
-                0x000000a2                __vector_5
                 0x000000a2                __vector_4
                 0x000000a2                __vector_9
-                0x000000a2                __vector_2
                 0x000000a2                __vector_21
                 0x000000a2                __vector_15
                 0x000000a2                __vector_8
@@ -491,176 +661,36 @@ END GROUP
                 0x000000a2                __vector_20
                 0x000000a6                . = ALIGN (0x2)
  *(.text.*)
- .text.ds18b20_init
-                0x000000a6       0x20 Ds18b20_Sensor/ds18b20_sensor.o
-                0x000000a6                ds18b20_init
- .text.ds18b20_reset
-                0x000000c6       0x88 Ds18b20_Sensor/ds18b20_sensor.o
-                0x000000c6                ds18b20_reset
- .text.ds18b20_write_bit
-                0x0000014e       0x32 Ds18b20_Sensor/ds18b20_sensor.o
-                0x0000014e                ds18b20_write_bit
- .text.ds18b20_read_bit
-                0x00000180       0x32 Ds18b20_Sensor/ds18b20_sensor.o
-                0x00000180                ds18b20_read_bit
- .text.ds18b20_write_byte
-                0x000001b2       0x2c Ds18b20_Sensor/ds18b20_sensor.o
-                0x000001b2                ds18b20_write_byte
- .text.ds18b20_read_byte
-                0x000001de       0x32 Ds18b20_Sensor/ds18b20_sensor.o
-                0x000001de                ds18b20_read_byte
- .text.ds18b20_request_temperature
-                0x00000210       0x24 Ds18b20_Sensor/ds18b20_sensor.o
-                0x00000210                ds18b20_request_temperature
- .text.ds18b20_read_temperature
-                0x00000234       0x68 Ds18b20_Sensor/ds18b20_sensor.o
-                0x00000234                ds18b20_read_temperature
- .text.i2c_init
-                0x0000029c        0xe I2C/I2C.o
-                0x0000029c                i2c_init
- .text.i2c_start
-                0x000002aa       0x4c I2C/I2C.o
-                0x000002aa                i2c_start
- .text.i2c_write
-                0x000002f6       0x24 I2C/I2C.o
-                0x000002f6                i2c_write
- .text.i2c_stop
-                0x0000031a       0x10 I2C/I2C.o
-                0x0000031a                i2c_stop
- .text.lcd_send_nibble_i2c
-                0x0000032a       0x3e Lcd_Display/lcd_display.o
- .text.lcd_send_byte_i2c
-                0x00000368       0x58 Lcd_Display/lcd_display.o
-                0x00000368                lcd_send_byte_i2c
- .text.lcd_send_char
-                0x000003c0        0x8 Lcd_Display/lcd_display.o
-                0x000003c0                lcd_send_char
- .text.lcd_send_string
-                0x000003c8       0x1a Lcd_Display/lcd_display.o
-                0x000003c8                lcd_send_string
- .text.lcd_set_cursor
-                0x000003e2       0x16 Lcd_Display/lcd_display.o
-                0x000003e2                lcd_set_cursor
- .text.lcd_display_status
-                0x000003f8      0x110 Lcd_Display/lcd_display.o
-                0x000003f8                lcd_display_status
- .text.lcd_clear
-                0x00000508       0x16 Lcd_Display/lcd_display.o
-                0x00000508                lcd_clear
- .text.lcd_init
-                0x0000051e       0x70 Lcd_Display/lcd_display.o
-                0x0000051e                lcd_init
- .text.main     0x0000058e       0xbc main.o
-                0x0000058e                main
- .text.pwm_init
-                0x0000064a       0x1c Pwm_Control/pwm_control.o
-                0x0000064a                pwm_init
- .text.pwm_set_duty
-                0x00000666       0x62 Pwm_Control/pwm_control.o
-                0x00000666                pwm_set_duty
- .text.pwm_update_based_on_temp
-                0x000006c8       0x92 Pwm_Control/pwm_control.o
-                0x000006c8                pwm_update_based_on_temp
- .text.USART_Init
-                0x0000075a       0x16 Uart/uart_utils.o
-                0x0000075a                USART_Init
- .text.USART_Transmit
-                0x00000770        0xe Uart/uart_utils.o
-                0x00000770                USART_Transmit
- .text.USART_PutString
-                0x0000077e       0x2c Uart/uart_utils.o
-                0x0000077e                USART_PutString
- .text.printf   0x000007aa       0x58 Uart/uart_utils.o
-                0x000007aa                printf
- .text.avr-libc.fplib
-                0x00000802        0xe d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                0x00000802                __subsf3
-                0x00000804                __addsf3
- .text.avr-libc.fplib
-                0x00000810       0xcc d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
-                0x00000832                __addsf3x
- .text.avr-libc.fplib
-                0x000008dc       0x5e d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x000008dc                __fixunssfsi
- .text.avr-libc.fplib
-                0x0000093a       0x7a d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x0000093a                __floatunsisf
-                0x0000093e                __floatsisf
- .text.avr-libc.fplib
-                0x000009b4        0xc d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x000009b4                __fp_inf
- .text.avr-libc.fplib
-                0x000009c0        0x6 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x000009c0                __fp_nan
- .text.avr-libc.fplib
-                0x000009c6        0xe d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x000009c6                __fp_pscA
- .text.avr-libc.fplib
-                0x000009d4        0xe d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x000009d4                __fp_pscB
- .text.avr-libc.fplib
-                0x000009e2       0x22 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x000009e2                __fp_round
- .text.avr-libc.fplib
-                0x00000a04       0x44 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x00000a04                __fp_split3
-                0x00000a14                __fp_splitA
- .text.avr-libc.fplib
-                0x00000a48        0xe d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00000a48                __fp_zero
-                0x00000a4a                __fp_szero
- .text.avr-libc.fplib
-                0x00000a56        0xa d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
-                0x00000a56                __gesf2
-                0x00000a56                __gtsf2
- .text.avr-libc.fplib
-                0x00000a60        0x8 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00000a60                __mulsf3
- .text.avr-libc.fplib
-                0x00000a68       0xd2 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00000a86                __mulsf3x
-                0x00000a8c                __mulsf3_pse
- .text.avr-libc.fplib
-                0x00000b3a       0x48 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
-                0x00000b3a                __fp_cmp
- .text.libgcc.mul
-                0x00000b82       0x1e d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00000b82                __umulhisi3
- .text.avr-libc
-                0x00000ba0       0x60 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
-                0x00000ba0                puts
- .text.avr-libc
-                0x00000c00       0x60 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
-                0x00000c00                snprintf
- .text.avr-libc
-                0x00000c60       0x58 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vsnprintf.o)
-                0x00000c60                vsnprintf
- .text.avr-libc
-                0x00000cb8      0x3c2 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00000cb8                vfprintf
- .text.avr-libc
-                0x0000107a       0x16 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x0000107a                strnlen_P
- .text.avr-libc
-                0x00001090       0x16 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00001090                strnlen
- .text.avr-libc
-                0x000010a6       0x78 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x000010a6                fputc
- .text.avr-libc
-                0x0000111e       0xbc d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x0000111e                __ultoa_invert
- .text.libgcc.prologue
-                0x000011da       0x38 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x000011da                __prologue_saves__
- .text.libgcc.prologue
-                0x00001212       0x36 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x00001212                __epilogue_restores__
-                0x00001248                . = ALIGN (0x2)
+ .text.main     0x000000a6       0x38 main.o
+                0x000000a6                main
+ .text.__vector_2
+                0x000000de       0x1e Servo_Control/servo_control.o
+                0x000000de                __vector_2
+ .text.led_chasing_init
+                0x000000fc       0x14 Led_Chasing/led_chasing.o
+                0x000000fc                led_chasing_init
+ .text.initPCINT
+                0x00000110       0x22 Led_Chasing/led_chasing.o
+                0x00000110                initPCINT
+ .text.shiftOut16
+                0x00000132       0x40 Led_Chasing/led_chasing.o
+                0x00000132                shiftOut16
+ .text.latch    0x00000172       0x16 Led_Chasing/led_chasing.o
+                0x00000172                latch
+ .text.led_right_to_left
+                0x00000188       0x42 Led_Chasing/led_chasing.o
+                0x00000188                led_right_to_left
+ .text.led_left_to_right
+                0x000001ca       0x42 Led_Chasing/led_chasing.o
+                0x000001ca                led_left_to_right
+ .text.__vector_5
+                0x0000020c       0x46 Led_Chasing/led_chasing.o
+                0x0000020c                __vector_5
+                0x00000252                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00001248        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00001248                _exit
-                0x00001248                exit
+ .fini9         0x00000252        0x0 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000252                _exit
+                0x00000252                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -679,47 +709,42 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00001248        0x4 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000252        0x4 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000124c                _etext = .
+                0x00000256                _etext = .
 
-.data           0x00800100      0x182 load address 0x0000124c
+.data           0x00800100        0x0 load address 0x00000256
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
- .rodata.str1.1
-                0x00800100       0x96 Ds18b20_Sensor/ds18b20_sensor.o
- .rodata.str1.1
-                0x00800196       0x28 Lcd_Display/lcd_display.o
- .rodata.str1.1
-                0x008001be       0xc3 main.o
  *(.gnu.linkonce.r*)
-                0x00800282                . = ALIGN (0x2)
- *fill*         0x00800281        0x1 
-                0x00800282                _edata = .
-                0x00800282                PROVIDE (__data_end, .)
+                0x00800100                . = ALIGN (0x2)
+                0x00800100                _edata = .
+                0x00800100                PROVIDE (__data_end, .)
 
-.bss            0x00800282        0xc
-                0x00800282                PROVIDE (__bss_start, .)
+.bss            0x00800100        0x5
+                0x00800100                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
+ .bss.button_pressed
+                0x00800100        0x1 Servo_Control/servo_control.o
+                0x00800100                button_pressed
+ .bss.button_event
+                0x00800101        0x4 Led_Chasing/led_chasing.o
+                0x00800101                button_event
  *(COMMON)
- COMMON         0x00800282        0x6 main.o
-                0x00800282                systemState
- COMMON         0x00800288        0x6 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
-                0x00800288                __iob
-                0x0080028e                PROVIDE (__bss_end, .)
-                0x0000124c                __data_load_start = LOADADDR (.data)
-                0x000013ce                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800105                PROVIDE (__bss_end, .)
+                0x00000256                __data_load_start = LOADADDR (.data)
+                0x00000256                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080028e        0x0
+.noinit         0x00800105        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080028e                _end = .
+                0x00800105                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -759,22 +784,12 @@ END GROUP
 .stab.indexstr
  *(.stab.indexstr)
 
-.comment        0x00000000       0x5c
+.comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 Ds18b20_Sensor/ds18b20_sensor.o
+ .comment       0x00000000       0x30 main.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 I2C/I2C.o
- .comment       0x00000030       0x31 Lcd_Display/lcd_display.o
- .comment       0x00000030       0x31 main.o
- .comment       0x00000030       0x31 Pwm_Control/pwm_control.o
- .comment       0x00000030       0x31 Uart/uart_utils.o
- .comment       0x00000030       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
- .comment       0x00000030       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
- .comment       0x00000030       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vsnprintf.o)
- .comment       0x00000030       0x2c d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                                 0x2d (size before relaxing)
- .comment       0x0000005c       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
- .comment       0x0000005c       0x31 d:/microchip_setup/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
+ .comment       0x00000030       0x31 Servo_Control/servo_control.o
+ .comment       0x00000030       0x31 Led_Chasing/led_chasing.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -796,87 +811,60 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x170
+.debug_aranges  0x00000000       0xc8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x58 Ds18b20_Sensor/ds18b20_sensor.o
+                0x00000000       0x20 main.o
  .debug_aranges
-                0x00000058       0x38 I2C/I2C.o
+                0x00000020       0x40 Servo_Control/servo_control.o
  .debug_aranges
-                0x00000090       0x58 Lcd_Display/lcd_display.o
- .debug_aranges
-                0x000000e8       0x20 main.o
- .debug_aranges
-                0x00000108       0x30 Pwm_Control/pwm_control.o
- .debug_aranges
-                0x00000138       0x38 Uart/uart_utils.o
+                0x00000060       0x68 Led_Chasing/led_chasing.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1aff
+.debug_info     0x00000000      0xda5
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 D:/Microchip_Setup/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4      0x5dc Ds18b20_Sensor/ds18b20_sensor.o
- .debug_info    0x00000bd0       0xf5 I2C/I2C.o
- .debug_info    0x00000cc5      0x725 Lcd_Display/lcd_display.o
- .debug_info    0x000013ea      0x39b main.o
- .debug_info    0x00001785      0x16a Pwm_Control/pwm_control.o
- .debug_info    0x000018ef      0x210 Uart/uart_utils.o
+ .debug_info    0x000005f4      0x1f3 main.o
+ .debug_info    0x000007e7      0x198 Servo_Control/servo_control.o
+ .debug_info    0x0000097f      0x426 Led_Chasing/led_chasing.o
 
-.debug_abbrev   0x00000000      0xda8
+.debug_abbrev   0x00000000      0x970
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 D:/Microchip_Setup/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2      0x1ef Ds18b20_Sensor/ds18b20_sensor.o
- .debug_abbrev  0x00000791       0x7c I2C/I2C.o
- .debug_abbrev  0x0000080d      0x1f2 Lcd_Display/lcd_display.o
- .debug_abbrev  0x000009ff      0x15e main.o
- .debug_abbrev  0x00000b5d       0xdf Pwm_Control/pwm_control.o
- .debug_abbrev  0x00000c3c      0x16c Uart/uart_utils.o
+ .debug_abbrev  0x000005a2      0x11b main.o
+ .debug_abbrev  0x000006bd      0x10e Servo_Control/servo_control.o
+ .debug_abbrev  0x000007cb      0x1a5 Led_Chasing/led_chasing.o
 
-.debug_line     0x00000000      0xe85
+.debug_line     0x00000000      0x7a8
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 D:/Microchip_Setup/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000134      0x36e Ds18b20_Sensor/ds18b20_sensor.o
- .debug_line    0x000004a2      0x162 I2C/I2C.o
- .debug_line    0x00000604      0x31d Lcd_Display/lcd_display.o
- .debug_line    0x00000921      0x23d main.o
- .debug_line    0x00000b5e      0x196 Pwm_Control/pwm_control.o
- .debug_line    0x00000cf4      0x191 Uart/uart_utils.o
+ .debug_line    0x00000134      0x123 main.o
+ .debug_line    0x00000257      0x1b6 Servo_Control/servo_control.o
+ .debug_line    0x0000040d      0x39b Led_Chasing/led_chasing.o
 
-.debug_frame    0x00000000      0x338
+.debug_frame    0x00000000      0x17c
  *(.debug_frame)
- .debug_frame   0x00000000       0xc8 Ds18b20_Sensor/ds18b20_sensor.o
- .debug_frame   0x000000c8       0x54 I2C/I2C.o
- .debug_frame   0x0000011c       0xf4 Lcd_Display/lcd_display.o
- .debug_frame   0x00000210       0x3c main.o
- .debug_frame   0x0000024c       0x68 Pwm_Control/pwm_control.o
- .debug_frame   0x000002b4       0x84 Uart/uart_utils.o
+ .debug_frame   0x00000000       0x24 main.o
+ .debug_frame   0x00000024       0x74 Servo_Control/servo_control.o
+ .debug_frame   0x00000098       0xe4 Led_Chasing/led_chasing.o
 
-.debug_str      0x00000000      0x6c2
+.debug_str      0x00000000      0x4c9
  *(.debug_str)
  .debug_str     0x00000000      0x208 D:/Microchip_Setup/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x279 Ds18b20_Sensor/ds18b20_sensor.o
-                                0x2d2 (size before relaxing)
- .debug_str     0x00000481       0x3b I2C/I2C.o
-                                0x19e (size before relaxing)
- .debug_str     0x000004bc      0x10f Lcd_Display/lcd_display.o
-                                0x31a (size before relaxing)
- .debug_str     0x000005cb       0x4a main.o
-                                0x2ea (size before relaxing)
- .debug_str     0x00000615       0x3d Pwm_Control/pwm_control.o
-                                0x206 (size before relaxing)
- .debug_str     0x00000652       0x70 Uart/uart_utils.o
-                                0x1fb (size before relaxing)
+ .debug_str     0x00000208      0x1bd main.o
+                                0x1f1 (size before relaxing)
+ .debug_str     0x000003c5       0x83 Servo_Control/servo_control.o
+                                0x224 (size before relaxing)
+ .debug_str     0x00000448       0x81 Led_Chasing/led_chasing.o
+                                0x272 (size before relaxing)
 
-.debug_loc      0x00000000      0xe86
+.debug_loc      0x00000000      0x2fb
  *(.debug_loc)
- .debug_loc     0x00000000      0x527 Ds18b20_Sensor/ds18b20_sensor.o
- .debug_loc     0x00000527       0x67 I2C/I2C.o
- .debug_loc     0x0000058e      0x568 Lcd_Display/lcd_display.o
- .debug_loc     0x00000af6       0x70 main.o
- .debug_loc     0x00000b66      0x17f Pwm_Control/pwm_control.o
- .debug_loc     0x00000ce5      0x1a1 Uart/uart_utils.o
+ .debug_loc     0x00000000       0x48 main.o
+ .debug_loc     0x00000048       0x84 Servo_Control/servo_control.o
+ .debug_loc     0x000000cc      0x22f Led_Chasing/led_chasing.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -896,14 +884,11 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x128
+.debug_ranges   0x00000000       0xc8
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x60 Ds18b20_Sensor/ds18b20_sensor.o
- .debug_ranges  0x00000060       0x28 I2C/I2C.o
- .debug_ranges  0x00000088       0x48 Lcd_Display/lcd_display.o
- .debug_ranges  0x000000d0       0x10 main.o
- .debug_ranges  0x000000e0       0x20 Pwm_Control/pwm_control.o
- .debug_ranges  0x00000100       0x28 Uart/uart_utils.o
+ .debug_ranges  0x00000000       0x10 main.o
+ .debug_ranges  0x00000010       0x30 Servo_Control/servo_control.o
+ .debug_ranges  0x00000040       0x88 Led_Chasing/led_chasing.o
 
 .debug_macro
  *(.debug_macro)

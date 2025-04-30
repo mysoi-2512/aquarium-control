@@ -9,8 +9,12 @@
 #ifndef SERVO_CONTROL_H_
 #define SERVO_CONTROL_H_
 
+#include <stdint.h>
 
+// Initialize servo control
+void servo_init(void);
 
-
+// Rotate servo one full rotation
+void servo_rotate(void);
 
 #endif /* SERVO_CONTROL_H_ */
