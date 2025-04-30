@@ -12,9 +12,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-extern volatile uint32_t ir_data;
-extern volatile bool     ir_flag;
-
 #define IR_READY()     (ir_flag)
 #define IR_GET_CODE()  (ir_data)
 

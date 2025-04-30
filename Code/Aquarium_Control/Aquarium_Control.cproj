@@ -151,12 +151,6 @@
     <Compile Include="Ds18b20_Sensor/ds18b20_sensor.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="I2C/i2c.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="I2C/i2c.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="interface.h">
       <SubType>compile</SubType>
     </Compile>
@@ -190,18 +184,20 @@
     <Compile Include="Ds18b20_Sensor/ds18b20_sensor.h">
       <SubType>compile</SubType>
     </Compile>
-        <Compile Include="Led_Chasing/led_chasing.h">
+    <Compile Include="Led_Chasing/led_chasing.h">
       <SubType>compile</SubType>
     </Compile>
-        <Compile Include="Led_Chasing/led_chasing.c">
+    <Compile Include="Led_Chasing/led_chasing.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Uart/uart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Uart/uart.h">
-      <SubType>compile</SubType>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ds18b20_Sensor\" />
+    <Folder Include="Ir_Remote\" />
+    <Folder Include="Lcd_Display\" />
+    <Folder Include="Led_Chasing\" />
+    <Folder Include="Pwm_Control\" />
+    <Folder Include="Servo_Control\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
