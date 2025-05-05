@@ -24,6 +24,7 @@ int main(void) {
 	IR_Init();
 	LED_chase_Init();
 	uint16_t pattern = 0x0001;
+	bool all_on_flag = false;
 	Servo_Init();
 	uint8_t chase_mode = 0;
 
@@ -34,18 +35,44 @@ int main(void) {
 
 			switch (code) {
 				case IR_ALL_ON:
-				LED_Write(0xFFFF);
+				//Toggle all LEDs on/off
+				if (!all_on_flag)
+				{
+					LED_Write(0xFFFF);
+					all_on_flag = true;
+				}else
+				{
+					LED_Write(0x0000);
+					all_on_flag = false;
+				}
 				chase_mode = 0;
 				break;
-				case IR_ALL_OFF:
-				LED_Write(0x0000);
-				chase_mode = 0;
-				break;
+				
 				case IR_CHASE1:
-				chase_mode = 1;
+				//Toggle chase mode 1
+				if (chase_mode != 1)
+				{
+					chase_mode = 1;
+					all_on_flag = false;
+				}else
+				{
+					chase_mode = 0;
+					LED_Write(0x0000);
+				}
 				break;
+				
 				case IR_CHASE2:
-				chase_mode = 2;
+				//Toggle chase mode 2
+				if (chase_mode != 2)
+				{
+					chase_mode = 2;
+					all_on_flag = false;
+				}else
+				{
+					chase_mode = 0;
+					LED_Write(0x0000);
+				}
+				
 				break;
 				case IR_SERVO:
 				// Quay servo 180° ? gi? 1s ? quay v? 0°
