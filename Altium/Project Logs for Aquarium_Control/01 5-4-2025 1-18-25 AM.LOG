@@ -1,0 +1,6 @@
+Remove Pin=J2-GND From Net=SCL
+Remove Pin=J2-SDA From Net=SDA
+Remove Pin=P1-RX From Net=TXD
+Remove Pin=P1-TX From Net=RXD
+Remove Pin=P2-IN From Net=Servo Motor
+Change Component Designator: OldDesignator=Y1 NewDesignator=Y?

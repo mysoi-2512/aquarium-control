@@ -1,0 +1,44 @@
+Change Component Designator: OldDesignator=J3 NewDesignator=J4
+Change Component Designator: OldDesignator=J4 NewDesignator=J5
+Added Component: Designator=J3(FP-PPTC031LGBN-RC-MFG)
+Add component (AddParameter): Name = "Color"; Value = "Black"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Connector Type"; Value = "Header, Socket"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Material"; Value = "Bronze"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Tin"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Current Rating"; Value = "3A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Gender"; Value = "Female"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "2.4mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Housing Color"; Value = "Black"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Housing Material"; Value = "Plastic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Lead Free"; Value = "Lead Free"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Length"; Value = "8.12mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "105ÅãC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-40ÅãC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "NexarPartId"; Value = "270343"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Positions"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Bulk"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS"; Value = "Compliant"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Termination"; Value = "Solder"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Width"; Value = "8.5mm"; VariantName = "[No Variations]"
+Add Pin To Net: Unknown Pin: Pin J2-GND
+Add Pin To Net: Unknown Pin: Pin J2-SCL
+Add Pin To Net: Unknown Pin: Pin J2-SDA
+Add Pin To Net: Unknown Pin: Pin J2-VCC
+Added Pin To Net: NetName=+5V_Header Pin=J3-1
+Added Pin To Net: NetName=Servo Motor Pin=J3-2
+Added Pin To Net: NetName=GND Pin=J3-3
+Add Pin To Net: Unknown Pin: Pin J4-GND
+Add Pin To Net: Unknown Pin: Pin J5-VCC
+Add Pin To Net: Unknown Pin: Pin P1-+5V_Header
+Add Pin To Net: Unknown Pin: Pin P1-CTS
+Add Pin To Net: Unknown Pin: Pin P1-DRT
+Add Pin To Net: Unknown Pin: Pin P1-GND
+Add Pin To Net: Unknown Pin: Pin P1-RX
+Add Pin To Net: Unknown Pin: Pin P1-TX
+Added Pin To Net: NetName=NetJ4_VCC Pin=K1-14
+Added Net: Name=NetJ4_VCC
+Added Pin To Net: NetName=NetJ5_GND Pin=Q2-3
+Added Net: Name=NetJ5_GND
