@@ -384,7 +384,7 @@ void Servo_SetAngle(uint8_t angle) {
  244:	08 95       	ret
 
 00000246 <ShiftOut>:
-#define DS     PD6
+#define DS     PB2
 
 // Hàm d?ch 1 byte ra 74HC595
 void ShiftOut (uint8_t data)
@@ -393,7 +393,7 @@ void ShiftOut (uint8_t data)
  246:	97 e0       	ldi	r25, 0x07	; 7
  248:	1a c0       	rjmp	.+52     	; 0x27e <ShiftOut+0x38>
 	{
-		if (data & (1 << i)) PORTD |=  (1 << DS);
+		if (data & (1 << i)) PORTB |=  (1 << DS);
  24a:	28 2f       	mov	r18, r24
  24c:	30 e0       	ldi	r19, 0x00	; 0
  24e:	09 2e       	mov	r0, r25
@@ -404,19 +404,19 @@ void ShiftOut (uint8_t data)
  258:	e2 f7       	brpl	.-8      	; 0x252 <ShiftOut+0xc>
  25a:	20 ff       	sbrs	r18, 0
  25c:	04 c0       	rjmp	.+8      	; 0x266 <ShiftOut+0x20>
- 25e:	2b b1       	in	r18, 0x0b	; 11
- 260:	20 64       	ori	r18, 0x40	; 64
- 262:	2b b9       	out	0x0b, r18	; 11
+ 25e:	25 b1       	in	r18, 0x05	; 5
+ 260:	24 60       	ori	r18, 0x04	; 4
+ 262:	25 b9       	out	0x05, r18	; 5
  264:	03 c0       	rjmp	.+6      	; 0x26c <ShiftOut+0x26>
-		else                 PORTD &= ~(1 << DS);
- 266:	2b b1       	in	r18, 0x0b	; 11
- 268:	2f 7b       	andi	r18, 0xBF	; 191
- 26a:	2b b9       	out	0x0b, r18	; 11
+		else                 PORTB &= ~(1 << DS);
+ 266:	25 b1       	in	r18, 0x05	; 5
+ 268:	2b 7f       	andi	r18, 0xFB	; 251
+ 26a:	25 b9       	out	0x05, r18	; 5
 
-		PORTD |=  (1 << SH_CP);
- 26c:	2b b1       	in	r18, 0x0b	; 11
- 26e:	20 61       	ori	r18, 0x10	; 16
- 270:	2b b9       	out	0x0b, r18	; 11
+		PORTB |=  (1 << SH_CP);
+ 26c:	25 b1       	in	r18, 0x05	; 5
+ 26e:	28 60       	ori	r18, 0x08	; 8
+ 270:	25 b9       	out	0x05, r18	; 5
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
@@ -425,12 +425,12 @@ void ShiftOut (uint8_t data)
 	__builtin_avr_delay_cycles(__ticks_dc);
  272:	00 00       	nop
 		_delay_us(1);
-		PORTD &= ~(1 << SH_CP);
- 274:	2b b1       	in	r18, 0x0b	; 11
- 276:	2f 7e       	andi	r18, 0xEF	; 239
- 278:	2b b9       	out	0x0b, r18	; 11
+		PORTB &= ~(1 << SH_CP);
+ 274:	25 b1       	in	r18, 0x05	; 5
+ 276:	27 7f       	andi	r18, 0xF7	; 247
+ 278:	25 b9       	out	0x05, r18	; 5
  27a:	00 00       	nop
-#define DS     PD6
+#define DS     PB2
 
 // Hàm d?ch 1 byte ra 74HC595
 void ShiftOut (uint8_t data)
@@ -439,9 +439,9 @@ void ShiftOut (uint8_t data)
  27c:	91 50       	subi	r25, 0x01	; 1
  27e:	99 23       	and	r25, r25
  280:	24 f7       	brge	.-56     	; 0x24a <ShiftOut+0x4>
-		PORTD |=  (1 << SH_CP);
+		PORTB |=  (1 << SH_CP);
 		_delay_us(1);
-		PORTD &= ~(1 << SH_CP);
+		PORTB &= ~(1 << SH_CP);
 		_delay_us(1);
 	}
 }
@@ -452,16 +452,16 @@ void ShiftOut (uint8_t data)
 // Latch d? li?u lên output
 void latch(void) 
 {
-	PORTD |=  (1 << ST_CP);
- 284:	8b b1       	in	r24, 0x0b	; 11
+	PORTB |=  (1 << ST_CP);
+ 284:	85 b1       	in	r24, 0x05	; 5
  286:	80 62       	ori	r24, 0x20	; 32
- 288:	8b b9       	out	0x0b, r24	; 11
+ 288:	85 b9       	out	0x05, r24	; 5
  28a:	00 00       	nop
 	_delay_us(1);
-	PORTD &= ~(1 << ST_CP);
- 28c:	8b b1       	in	r24, 0x0b	; 11
+	PORTB &= ~(1 << ST_CP);
+ 28c:	85 b1       	in	r24, 0x05	; 5
  28e:	8f 7d       	andi	r24, 0xDF	; 223
- 290:	8b b9       	out	0x0b, r24	; 11
+ 290:	85 b9       	out	0x05, r24	; 5
  292:	00 00       	nop
  294:	08 95       	ret
 
@@ -471,14 +471,14 @@ void latch(void)
 // Kh?i t?o các chân
 void LED_chase_Init(void) 
 {
-	DDRD |= (1<<SH_CP)|(1<<ST_CP)|(1<<DS);
- 296:	8a b1       	in	r24, 0x0a	; 10
- 298:	80 67       	ori	r24, 0x70	; 112
- 29a:	8a b9       	out	0x0a, r24	; 10
-	PORTD &= ~((1<<SH_CP)|(1<<ST_CP)|(1<<DS));
- 29c:	8b b1       	in	r24, 0x0b	; 11
- 29e:	8f 78       	andi	r24, 0x8F	; 143
- 2a0:	8b b9       	out	0x0b, r24	; 11
+	DDRB |= (1<<SH_CP)|(1<<ST_CP)|(1<<DS);
+ 296:	84 b1       	in	r24, 0x04	; 4
+ 298:	8c 62       	ori	r24, 0x2C	; 44
+ 29a:	84 b9       	out	0x04, r24	; 4
+	PORTB &= ~((1<<SH_CP)|(1<<ST_CP)|(1<<DS));
+ 29c:	85 b1       	in	r24, 0x05	; 5
+ 29e:	83 7d       	andi	r24, 0xD3	; 211
+ 2a0:	85 b9       	out	0x05, r24	; 5
  2a2:	08 95       	ret
 
 000002a4 <LED_Write>:

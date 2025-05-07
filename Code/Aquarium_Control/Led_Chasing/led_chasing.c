@@ -9,22 +9,22 @@
 #include <util/delay.h>
 #include <stdint.h>
 
-// PB0 = SH_CP, PB1 = ST_CP, PB2 = DS
-#define SH_CP  PD4
-#define ST_CP  PD5
-#define DS     PD6
+// PB3 = SH_CP, PB5 = ST_CP, PB2 = DS
+#define SH_CP  PB3
+#define ST_CP  PB5
+#define DS     PB2
 
 // Hàm d?ch 1 byte ra 74HC595
 void ShiftOut (uint8_t data)
 {
 	for (int8_t i = 7; i >= 0; i--) 
 	{
-		if (data & (1 << i)) PORTD |=  (1 << DS);
-		else                 PORTD &= ~(1 << DS);
+		if (data & (1 << i)) PORTB |=  (1 << DS);
+		else                 PORTB &= ~(1 << DS);
 
-		PORTD |=  (1 << SH_CP);
+		PORTB |=  (1 << SH_CP);
 		_delay_us(1);
-		PORTD &= ~(1 << SH_CP);
+		PORTB &= ~(1 << SH_CP);
 		_delay_us(1);
 	}
 }
@@ -32,17 +32,17 @@ void ShiftOut (uint8_t data)
 // Latch d? li?u lên output
 void latch(void) 
 {
-	PORTD |=  (1 << ST_CP);
+	PORTB |=  (1 << ST_CP);
 	_delay_us(1);
-	PORTD &= ~(1 << ST_CP);
+	PORTB &= ~(1 << ST_CP);
 	_delay_us(1);
 }
 
 // Kh?i t?o các chân
 void LED_chase_Init(void) 
 {
-	DDRD |= (1<<SH_CP)|(1<<ST_CP)|(1<<DS);
-	PORTD &= ~((1<<SH_CP)|(1<<ST_CP)|(1<<DS));
+	DDRB |= (1<<SH_CP)|(1<<ST_CP)|(1<<DS);
+	PORTB &= ~((1<<SH_CP)|(1<<ST_CP)|(1<<DS));
 }
 
 // Xu?t pattern ra LED
