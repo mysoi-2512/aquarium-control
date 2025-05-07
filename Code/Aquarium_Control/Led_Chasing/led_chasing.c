@@ -10,9 +10,9 @@
 #include <stdint.h>
 
 // PB0 = SH_CP, PB1 = ST_CP, PB2 = DS
-#define SH_CP  PD2
-#define ST_CP  PD3
-#define DS     PD4
+#define SH_CP  PD4
+#define ST_CP  PD5
+#define DS     PD6
 
 // Hàm d?ch 1 byte ra 74HC595
 void ShiftOut (uint8_t data)
@@ -41,8 +41,8 @@ void latch(void)
 // Kh?i t?o các chân
 void LED_chase_Init(void) 
 {
-	DDRB |= (1<<SH_CP)|(1<<ST_CP)|(1<<DS);
-	PORTB &= ~((1<<SH_CP)|(1<<ST_CP)|(1<<DS));
+	DDRD |= (1<<SH_CP)|(1<<ST_CP)|(1<<DS);
+	PORTD &= ~((1<<SH_CP)|(1<<ST_CP)|(1<<DS));
 }
 
 // Xu?t pattern ra LED

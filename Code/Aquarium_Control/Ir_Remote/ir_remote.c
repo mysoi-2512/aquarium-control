@@ -4,6 +4,9 @@
  * Created: 4/8/2025 8:18:15 PM
  *  Author: Admin
  */ 
+
+
+/*
 #include "ir_remote.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -12,11 +15,16 @@
 volatile uint32_t ir_data = 0;
 volatile bool     ir_flag = false;
 
+
+*/
+
 /*
   NEC protocol decode via INT0 + Timer1:
   - INT0 falling edge bắt bắt đầu khung
   - Đo thời gian low/high, giải mã 32-bit
 */
+
+/*
 void IR_Init(void) {
     // PD2 (INT0) input, pull-up
     DDRD &= ~(1<<PD2);
@@ -92,3 +100,4 @@ ISR(INT0_vect) {
             state = 0;
     }
 }
+*/

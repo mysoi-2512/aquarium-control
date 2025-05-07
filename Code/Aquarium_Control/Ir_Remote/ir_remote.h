@@ -5,7 +5,7 @@
  *  Author: Admin
  */ 
 
-
+/*
 #ifndef IR_REMOTE_H
 #define IR_REMOTE_H
 
@@ -22,3 +22,4 @@ void IR_Init(void);
 void IR_ClearFlag(void);
 
 #endif // IR_REMOTE_H
+*/
