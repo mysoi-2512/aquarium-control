@@ -20,14 +20,14 @@ void latch(void);
 void LED_chase_Init(void);
 
 // Xuất pattern ra LED
-void LED_Write(uint16_t pattern);
+void LED_Write(uint8_t pattern);
 
 // Ghi 16-bit pattern ra 2×74HC595
-void LED_Write(uint16_t pattern);
+void LED_Write(uint8_t pattern);
 
 // Mode 1: LED chạy từ trái sang phải
-void Led_chase1(uint16_t *pattern);
+void Led_chase1(uint8_t *pattern);
 // Mode 2: LED chạy từ phải sang trái
-void Led_chase2(uint16_t *pattern);
+void Led_chase2(uint8_t *pattern);
 
 #endif // LED_CHASING_H

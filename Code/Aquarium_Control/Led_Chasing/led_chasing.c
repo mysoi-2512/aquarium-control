@@ -46,27 +46,26 @@ void LED_chase_Init(void)
 }
 
 // Xu?t pattern ra LED
-void LED_Write(uint16_t pattern) 
+void LED_Write(uint8_t pattern) 
 {
-	ShiftOut((uint8_t)(pattern >> 8));       // G?i high byte tr??c
-	ShiftOut((uint8_t)(pattern & 0xFF));     // G?i low byte sau
+	ShiftOut(pattern);       // G?i high byte tr??c
 	latch();
 }
 
 // Mode 1: LED ch?y t? trái sang ph?i
-void Led_chase1(uint16_t *pattern) {
+void Led_chase1(uint8_t *pattern) {
 	LED_Write(*pattern);
 	_delay_ms(10);
 
 	*pattern <<= 1;
-	if (*pattern == 0) *pattern = 0x0001;
+	if (*pattern == 0) *pattern = 0x01;
 }
 
 // Mode 2: LED ch?y t? ph?i sang trái
-void Led_chase2(uint16_t *pattern) {
+void Led_chase2(uint8_t *pattern) {
 	LED_Write(*pattern);
 	_delay_ms(100);
 
 	*pattern >>= 1;
-	if (*pattern == 0) *pattern = 0x8000;
+	if (*pattern == 0) *pattern = 0x80;
 }

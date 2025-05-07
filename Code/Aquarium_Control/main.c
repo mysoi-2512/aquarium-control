@@ -48,7 +48,7 @@ ISR(INT1_vect) {
 int main(void) {
 	External_Interrupt_Init();
 	LED_chase_Init();
-	uint16_t pattern = 0x0001;
+	uint16_t pattern = 0x01;
 	Servo_Init();
 	uint8_t chase_mode = 0;
 
@@ -56,11 +56,11 @@ int main(void) {
 		switch (mode)
 		{
 			case 0:
-			LED_Write(0x0000);
+			LED_Write(0x00);
 			break;
 			
 			case 1:
-			LED_Write(0xFFFF);
+			LED_Write(0xFF);
 			break;
 			
 			case 2:
