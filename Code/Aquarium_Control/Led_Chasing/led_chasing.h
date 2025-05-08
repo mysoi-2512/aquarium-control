@@ -1,16 +1,10 @@
-/*
- * led_chasing.h
- *
- * Created: 4/8/2025 8:19:10 PM
- *  Author: Admin
- */ 
+#ifndef LED_CHASING_H
+#define LED_CHASING_H
 
+#include <avr/io.h>
 
-#ifndef LED_CHASING_H_
-#define LED_CHASING_H_
+void led_chasing_init(void);
+void INT0_init(void);
+void updateLEDs(uint16_t pattern);
 
-
-
-
-
-#endif /* LED_CHASING_H_ */
+#endif

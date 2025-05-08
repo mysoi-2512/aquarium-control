@@ -53,9 +53,9 @@ void pwm_update_based_on_temp(float temp, SystemState* state)
 	uint8_t duty = 0;
 
 	// Mapping temp to duty
-	if (temp >= 29.0) duty = 100;
-	else if (temp >= 28.0) duty = 75;
-	else if (temp >= 27.0) duty = 30;
+	if (temp >= 31.0) duty = 0;
+	else if (temp >= 30.0) duty = 0;
+	else if (temp >= 25.0) duty = 0;
 	else duty = 0;
 
 	// Set duty for PWM
@@ -65,10 +65,9 @@ void pwm_update_based_on_temp(float temp, SystemState* state)
 	state->pump_pwm_value = duty;  
 	state->pump_status = (duty > 0) ? 1 : 0;  
 
-	// ?i?u khi?n relay
 	if (duty > 0) {
-		COOLER_PORT |= (1 << COOLER_PIN);  // B?t relay
+		COOLER_PORT |= (1 << COOLER_PIN); 
 		} else {
-		COOLER_PORT &= ~(1 << COOLER_PIN);  // T?t relay
+		COOLER_PORT &= ~(1 << COOLER_PIN);  
 	}
 }

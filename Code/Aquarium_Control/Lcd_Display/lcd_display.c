@@ -11,24 +11,22 @@
 static void lcd_send_nibble_i2c(uint8_t data) {
     uint8_t i2c_data;
 
-    // G?i 4 bits cao + c·c ch‚n ?i?u khi?n
-    i2c_data = (data & 0xF0) | LCD_BL_PIN; // Gi? backlight luÙn b?t (cÅEth? ?i?u ch?nh)
+    i2c_data = (data & 0xF0) | LCD_BL_PIN; 
 
     // Enable pulse
     i2c_start(LCD_I2C_ADDR);
     i2c_write(i2c_data | LCD_EN_PIN);
-    _delay_us(5); // T?ng th?i gian tr?
+    _delay_us(5); 
     i2c_write(i2c_data & ~LCD_EN_PIN);
     i2c_stop();
-    _delay_us(50); // T?ng th?i gian tr?
+    _delay_us(50); 
 }
 
 void lcd_send_byte_i2c(uint8_t data, uint8_t rs) {
     uint8_t i2c_data_high, i2c_data_low;
 
-    i2c_start(LCD_I2C_ADDR); // B?t ??u giao d?ch I2C
+    i2c_start(LCD_I2C_ADDR); 
 
-    // G?i 4 bits cao
     i2c_data_high = (data & 0xF0) | LCD_BL_PIN | (rs ? LCD_RS_PIN : 0) | LCD_EN_PIN;
     i2c_write(i2c_data_high);
     //_delay_us(5);
@@ -36,39 +34,36 @@ void lcd_send_byte_i2c(uint8_t data, uint8_t rs) {
     i2c_write(i2c_data_high);
     //_delay_us(5);
 
-    // G?i 4 bits th?p
     i2c_data_low = ((data << 4) & 0xF0) | LCD_BL_PIN | (rs ? LCD_RS_PIN : 0) | LCD_EN_PIN;
     i2c_write(i2c_data_low);
    // _delay_us(5);
     i2c_data_low &= ~LCD_EN_PIN;
     i2c_write(i2c_data_low);
 
-    i2c_stop(); // K?t th˙c giao d?ch I2C
+    i2c_stop(); 
    // _delay_us(100);
 }
 
 void lcd_init(void) {
-    i2c_init(); // Kh?i t?o giao ti?p I2C
-    _delay_ms(100); // T?ng th?i gian tr?
+    i2c_init(); 
+    _delay_ms(100); 
 
-    // Kh?i t?o LCD ? ch? ?? 4-bit
     lcd_send_nibble_i2c(0x03 << 4);
-    _delay_us(500); // T?ng th?i gian tr?
+    _delay_us(500); 
     lcd_send_nibble_i2c(0x03 << 4);
-    _delay_us(500); // T?ng th?i gian tr?
+    _delay_us(500); 
     lcd_send_nibble_i2c(0x03 << 4);
-    _delay_us(100);  // T?ng th?i gian tr?
+    _delay_us(100);  
     lcd_send_nibble_i2c(0x02 << 4);
 
-    // C‡i ??t c·c ch?c n?ng LCD
-    lcd_send_byte_i2c(0x28, 0); // 4-bit, 2 dÚng, font 5x8
-    lcd_send_byte_i2c(0x0C, 0); // B?t hi?n th?, t?t con tr?, t?t nh?p nh·y con tr?
+    lcd_send_byte_i2c(0x28, 0); 
+    lcd_send_byte_i2c(0x0C, 0);
     lcd_clear();
-    lcd_send_byte_i2c(0x06, 0); // Ch? ?? d?ch con tr? sang ph?i sau m?i k˝ t?
+    lcd_send_byte_i2c(0x06, 0); 
 }
 
 void lcd_send_char(char data) {
-    lcd_send_byte_i2c(data, 1); // rs = 1 cho d? li?u (k˝ t?)
+    lcd_send_byte_i2c(data, 1); 
 }
 
 void lcd_send_string(const char *str) {
@@ -104,10 +99,10 @@ void lcd_set_cursor(uint8_t row, uint8_t col) {
         case 1: address = 0x40; break;
         default: address = 0x00; break;
     }
-    lcd_send_byte_i2c(0x80 | (address + col), 0); // 0x80 lÅEl?nh ??t ??a ch? DDRAM
+    lcd_send_byte_i2c(0x80 | (address + col), 0); 
 }
 
 void lcd_clear(void) {
-    lcd_send_byte_i2c(0x01, 0); // 0x01 lÅEl?nh xÛa m‡n hÅEh
-    _delay_ms(5); // T?ng th?i gian tr?
+    lcd_send_byte_i2c(0x01, 0); 
+    _delay_ms(5); 
 }
