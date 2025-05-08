@@ -1,5 +1,7 @@
 # 🐠 Aquarium Control System
 
+## Please view Report [HERE](https://docs.google.com/document/d/1OF4tAau-0sanhd8cBZsHKmiU7_impTn0-SaQfgHeYFg/edit?usp=sharing)
+
 ## 📌 Project Description
 An embedded project using ATmega328P to control aquarium. It features IR remote control for LEDs (decoration) and servo (feeding), temperature sensing with DS18B20, PWM-driven cooling with pump and thermoelectric cooler, and LCD display for real-time status.
 
